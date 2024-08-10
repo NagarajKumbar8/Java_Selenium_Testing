@@ -45,7 +45,7 @@ public class login_example {
 		{
 			System.out.println("logged in success");
 		}else {
-			System.out.println("Please check login details and login again");
+			System.out.println("login failed");
 		}
 		
 		
