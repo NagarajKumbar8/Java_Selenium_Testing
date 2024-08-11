@@ -17,7 +17,7 @@ public class common_base_code {
 	
 	@AfterSuite
 	public void close_browser() {
-		driver.close();
+		driver.quit();
 	}
 	
 }
