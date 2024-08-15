@@ -2,6 +2,9 @@ package common;
 
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -12,6 +15,8 @@ public class common_base_code {
 	@BeforeSuite
 	public void laucnch_browser() {
 	 driver = new ChromeDriver();
+	 driver.manage().window().maximize();
+	 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		
 	}
 	

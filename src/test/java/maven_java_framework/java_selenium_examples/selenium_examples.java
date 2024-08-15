@@ -3,11 +3,13 @@ package maven_java_framework.java_selenium_examples;
 import static org.testng.Assert.assertEquals;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -20,7 +22,7 @@ public class selenium_examples 	extends common_base_code {
 		//use WebDriver so i will support all kind of browser drivers if u use specific browser driver it might not support some feature 
 		//WebDriver driver = new ChromeDriver();
 		// set implicit wait (It will wait until web objects are loaded into screen)
-		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.get("https://rahulshettyacademy.com/locatorspractice/");  // open URL
 		//or
 		driver.navigate().to("https://rahulshettyacademy.com/locatorspractice/");
@@ -83,8 +85,97 @@ public class selenium_examples 	extends common_base_code {
 	@Test
 	public void static_dropdown()
 	{
-		driver.get("");
+		
+		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+		// static dropdown with select tag
+		
+		WebElement staticDropdown = driver.findElement(By.xpath("//select[@id=\"ctl00_mainContent_DropDownListCurrency\"]"));
+		//Select class for handling static dropdowns
+		Select dropdown =new Select(staticDropdown);
+		dropdown.selectByIndex(3);
+		System.out.println(dropdown.getFirstSelectedOption().getText());
+		dropdown.selectByValue("AED");
+		System.out.println(dropdown.getFirstSelectedOption().getText());
+		dropdown.selectByVisibleText("INR");
+		System.out.println(dropdown.getFirstSelectedOption().getText());
+		
+		driver.findElement(By.id("divpaxinfo")).click();
+		driver.findElement(By.id("hrefIncAdt")).click(); 
+		System.out.println(driver.findElement(By.id("divpaxinfo")).getText());
+		//while loop for selecting multiple click
+		int i=1;
+		while(i<4)
+		{
+			driver.findElement(By.id("hrefIncAdt")).click(); // 3 times click
+			i++;
+		}
+		System.out.println(driver.findElement(By.id("divpaxinfo")).getText());
+		//or
+		for(i=1; i<4; i++)
+		{
+			driver.findElement(By.id("hrefIncAdt")).click(); //3 clicks
+		}
+		
+		driver.findElement(By.id("btnclosepaxoption")).click();
+		System.out.println(driver.findElement(By.id("divpaxinfo")).getText());
+		
+		
 		
 	}
 
+	@Test
+	public void dynamic_dropdown() throws InterruptedException
+	{
+		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+		
+		driver.findElement(By.id("ctl00_mainContent_ddl_originStation1_CTXT")).click();
+		driver.findElement(By.xpath("//a[@value=\"IXG\"]")).click();
+		Thread.sleep(3000);
+		System.out.println(driver.findElement(By.id("ctl00_mainContent_ddl_originStation1_CTXT")).getText());
+		
+		driver.findElement(By.id("ctl00_mainContent_ddl_destinationStation1_CTXT")).click();
+		driver.findElement(By.xpath("(//a[@value=\"BLR\"])[2]")).click();
+		Thread.sleep(3000);
+		System.out.println(driver.findElement(By.id("ctl00_mainContent_ddl_destinationStation1_CTXT")).getText());
+		
+		
+		
+	}
+	
+	
+	@Test
+	public void auto_sugestive_dropdown() throws InterruptedException
+	{
+		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+		driver.findElement(By.id("autosuggest")).sendKeys("IND");
+		Thread.sleep(3000);
+		
+		List<WebElement> options= driver.findElements(By.xpath("//li[@class=\"ui-menu-item\"]/a"));
+		
+		for (WebElement option : options) //auto sugestive dropdown 
+		{
+			if (option.getText().equalsIgnoreCase("India"));
+			{
+				option.click();
+				System.out.println(driver.findElement(By.id("autosuggest")).getText());
+				
+				break;
+			}
+			
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
