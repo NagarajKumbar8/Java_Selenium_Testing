@@ -1,8 +1,11 @@
 package maven_java_framework.java_selenium_examples;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -17,6 +20,8 @@ import common.common_base_code;
 
 
 public class selenium_examples 	extends common_base_code {
+	private int i;
+
 	@Test
 	public void login() throws InterruptedException {
 		//use WebDriver so i will support all kind of browser drivers if u use specific browser driver it might not support some feature 
@@ -160,13 +165,119 @@ public class selenium_examples 	extends common_base_code {
 				System.out.println(driver.findElement(By.id("autosuggest")).getText());
 				
 				break;
-			}
+			}	
+		}	
+	}
+	
+	@Test
+	public void check_box() throws InterruptedException
+	{
+		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+		
+//		System.out.println(driver.findElement(By.id("ctl00_mainContent_chk_SeniorCitizenDiscount")).isSelected());
+//		driver.findElement(By.id("ctl00_mainContent_chk_SeniorCitizenDiscount")).click();
+//		System.out.println(driver.findElement(By.id("ctl00_mainContent_chk_SeniorCitizenDiscount")).isSelected());
+		
+		//print number of check boxes present in screen
+		driver.findElements(By.xpath("//input[@type=\"checkbox\"]")).size();
+		System.out.println(driver.findElements(By.xpath("//input[@type=\"checkbox\"]")).size());
+		Assert.assertEquals(driver.findElements(By.xpath("//input[@type=\"checkbox\"]")).size(), 6);
+		
+		//use assertions to validation checkbox
+		//not selected checkbox
+		Assert.assertFalse(driver.findElement(By.id("ctl00_mainContent_chk_SeniorCitizenDiscount")).isSelected());
+		
+		driver.findElement(By.id("ctl00_mainContent_chk_SeniorCitizenDiscount")).click();
+		
+		Assert.assertTrue(driver.findElement(By.id("ctl00_mainContent_chk_SeniorCitizenDiscount")).isSelected());
 			
-		}
+	}
+	
+	@Test
+	public void calenders() throws InterruptedException
+	{
+		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+
+		driver.findElement(By.xpath("(//button[@type=\"button\"])[1]")).click();
+		Thread.sleep(4000);
+		//driver.findElement(By.className(".ui-state-default.ui-state-highlight.ui-state-active")).click();
+		
+		System.out.println( driver.findElement(By.id("ctl00_mainContent_view_date2")).isEnabled());
+		driver.findElement(By.id("ctl00_mainContent_rbtnl_Trip_1")).click();
+		System.out.println( driver.findElement(By.id("ctl00_mainContent_view_date2")).isEnabled());
+		
+	}
+	
+	@Test
+	public void Alerts() throws InterruptedException
+	{
+		
+		String alertname="Nagaraj";
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		
+		driver.findElement(By.id("name")).sendKeys(alertname);
+		driver.findElement(By.id("alertbtn")).click();
+		
+		System.out.println(driver.switchTo().alert().getText());
+		driver.switchTo().alert().accept(); 
+		
+		driver.navigate().refresh();
+		Thread.sleep(3000);
+		driver.findElement(By.id("name")).sendKeys(alertname);
+		driver.findElement(By.id("confirmbtn")).click();
+		
+		System.out.println(driver.findElement(By.id("confirmbtn")).getText());
+		driver.switchTo().alert().dismiss();
 		
 		
 	}
 	
+	@Test
+	public void Additemstocart () throws InterruptedException
+	{
+		String[] items= {"Cucumber","Cauliflower","Tomato","Potato","Banana"};
+		
+		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
+		
+		List<WebElement> products=driver.findElements(By.cssSelector(".product-name"));
+	
+		for (int i=0; i<products.size(); i++);
+		{
+			//Cucumber - 1 Kg split and trime get only name  
+			
+			//int j=0;
+			String[] Name=products.get(i).getText().split("-");
+			String formattedName=Name[0].trim();
+			
+			//check whether name u fethced is present in array list or not
+			//convert array into array list 
+			
+			List itemsneeded=Arrays.asList(items);
+			
+			 //if all the itemas are found it will come out of the loop  if J==3 or items.length();
+			if(itemsneeded.contains(formattedName))
+			{
+				//j++;
+				driver.findElements(By.xpath("//button[@type=\"button\"]")).get(i).click();
+				
+				Thread.sleep(5000);
+				
+//				if(j==items.length())
+//				{
+//					break;
+//				}
+				
+			} 
+			System.out.println(driver.findElement(By.xpath("(//td/strong)[1]")).getText());
+		}
+	
+		
+	}
+			
+	}
+	
+	
+		
 	
 	
 	
@@ -174,8 +285,3 @@ public class selenium_examples 	extends common_base_code {
 	
 	
 	
-	
-	
-	
-	
-}
