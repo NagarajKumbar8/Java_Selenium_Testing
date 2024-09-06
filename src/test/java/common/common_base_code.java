@@ -7,6 +7,7 @@ import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class common_base_code {
 	
@@ -17,7 +18,8 @@ public class common_base_code {
 	 driver = new ChromeDriver();
 	 driver.manage().window().maximize();
 	 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		
+	 WebDriverWait w = new WebDriverWait(driver,Duration.ofSeconds(10));
+	 
 	}
 	
 	@AfterSuite

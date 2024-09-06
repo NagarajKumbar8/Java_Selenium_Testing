@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="selenium suite">
+  
+  <test name="TEST-NG test case">  
+   
+	<packages>
+		<package name="testng"></package>
+		<!-- <package name="maven_java_framework.java_selenium_examples"></package>-->
+		
+		
+	</packages>
+    
+  </test>  
+</suite> <!-- Suite -->

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="selenium suite" parallel="tests" thread-count="2">
+  <!--<parameter name="URL" value="values somthing"/>-->
+   <!-- Define listeners -->
+  <listeners>
+    <listener class-name="testng.Listeners"/>
+  </listeners>
+  
+  <test name="TEST-NG test case">  
+  <!-- <groups>
+   	<run>
+   		<include name="smoke"></include>
+   	</run>
+   
+   </groups>-->
+    <classes>
+    
+      <class name="testng.testngexample"/>
+      
+    </classes>
+    
+  </test> <!-- Test -->
+  
+    <test name="seleniump-Examples"> 
+   
+    <classes>	
+      <class name="maven_java_framework.java_selenium_examples.selenium_examples">
+        
+        <methods>
+          <exclude name="auto_sugestive_dropdown"/>
+          <exclude name="actionsdemo"/>
+          <exclude name="frames.*"/> <!-- it will exclude test cases start with frames word-->
+          <exclude name="findbrokenlink"/>
+          
+          
+          <include name="selenium4feature"/>
+
+          
+        </methods>
+        
+      </class>
+    </classes>
+    
+  </test> 
+</suite> <!-- Suite -->
