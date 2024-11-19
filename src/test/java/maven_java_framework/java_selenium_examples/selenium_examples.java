@@ -15,6 +15,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.management.DescriptorKey;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -38,11 +40,14 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import common.common_base_code;
+import io.qameta.allure.Description;
 
 public class selenium_examples extends common_base_code {
 	private int i;
-
-	@BeforeTest
+	
+	@Description ("Login Test example")
+	//@BeforeTest(alwaysRun=true)
+	@Test(invocationCount=5) //runs 5 times 
 	public void login() throws InterruptedException {
 		// use WebDriver so i will support all kind of browser drivers if u use specific
 		// browser driver it might not support some feature
@@ -101,7 +106,8 @@ public class selenium_examples extends common_base_code {
 
 	}
 
-	@AfterTest
+	//@AfterTest
+	@Test(priority=1) // priority test cases 1 is high
 	public void static_dropdown() {
 
 		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
@@ -197,7 +203,8 @@ public class selenium_examples extends common_base_code {
 		Assert.assertTrue(driver.findElement(By.id("ctl00_mainContent_chk_SeniorCitizenDiscount")).isSelected());
 
 	}
-
+	
+	@Description("Calender functionality test")
 	@Test
 	public void calenders() throws InterruptedException {
 		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
@@ -304,24 +311,31 @@ public class selenium_examples extends common_base_code {
 		
 		WebDriverWait w = new WebDriverWait(driver,Duration.ofSeconds(10));   //(driver, 5);
 		w.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class=\"promoInfo\"]")));
+		//w.until(ExpectedConditions.
 		//Syntax for waits
 		//w.until(ExpectedConditions
 		
 	}
-
+	
+	@Description("Move actions testcase")
 	@Test
-	public void actionsdemo()
+	public void actionsdemo() throws InterruptedException
 	{
 		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		Thread.sleep(3000);
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		
+		js.executeScript("window.scrollBy(0,900)");
+		Thread.sleep(2000);
+		//js.executeScript("document.querySelector('.tableFixHead').scrollTop=500");
 		
 		WebElement move=driver.findElement(By.id("mousehover"));
-		
 		Actions a=new Actions(driver);
-		
-		a.moveToElement(driver.findElement(By.id("mousehover")));
-		driver.findElement(By.xpath("//a[@href=\"#top\"]")).click();
-		//a.moveToElement(move).contextClick().build().perform(); //right click
-		
+		a.moveToElement(driver.findElement(By.id("mousehover"))).perform();
+		driver.findElement(By.xpath("//a[text()=\"Top\"]")).click();
+		WebElement Home=driver.findElement(By.xpath("//button[text()=\"Home\"]"));
+		a.moveToElement(Home).contextClick().build().perform(); //right click
+		Thread.sleep(5000);
 		
 	}
 	
@@ -351,9 +365,15 @@ public class selenium_examples extends common_base_code {
 		
 	}
 	
+	@Description("Drag and drop exacmple in ingognito browser")
 	@Test
-	public void frames() 
+	public void frames() throws InterruptedException 
 	{
+		ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        
+        // Initialize the Chrome driver with options
+        WebDriver driver = new ChromeDriver(options);
 		driver.get("https://jqueryui.com/droppable/");
 		
 		//Frames handling
@@ -374,7 +394,7 @@ public class selenium_examples extends common_base_code {
 		//switch back to main page
 		driver.switchTo().defaultContent();
 		
-		
+		Thread.sleep(5000);
 	}
 	
 	@Test
@@ -489,6 +509,7 @@ public class selenium_examples extends common_base_code {
 	public void httpscertificatehandle() throws IOException //ssl security close
 	{
 		//class chrome option
+		
 		ChromeOptions options=new ChromeOptions();
 		options.setAcceptInsecureCerts(true);
 		
@@ -511,7 +532,7 @@ public class selenium_examples extends common_base_code {
 		
 		List<WebElement> links= driver.findElements(By.cssSelector("li[class='gf-li'] a"));
 		//class 
-		SoftAssert a=new SoftAssert();
+		SoftAssert a=new SoftAssert(); //SoftAssert class
 		
 		for (WebElement link : links)
 		{
@@ -532,6 +553,7 @@ public class selenium_examples extends common_base_code {
 //			}
 			
 		}
+		
 		a.assertAll(); //it will tell failed link or broken one
 		
 	}
@@ -568,7 +590,54 @@ public class selenium_examples extends common_base_code {
 		
 	}
 	
+	@Description (" Reverse string and check palindrome")
+	@Test
+	public void reverseString()
+	{
+	    String name = "madam";
+	    String reverse = "";
+
+	    // Iterate through the string in reverse order
+	    for (int i = name.length() - 1; i >= 0; i--)
+	    {
+	        reverse += name.charAt(i); // Correctly append characters
+	    }
+
+	    // Output the reversed string
+	    System.out.println("Reversed string: " + reverse);
+	    
+	    //Check palindrom string 
+	    if(name.equalsIgnoreCase(reverse))
+	    {
+	    	System.out.println("its palindrom");
+	    
+	    }
+	    else {
+	    	System.out.println("its not palindrom");
+	    }
+	}
 	
+	@Test
+	public void searchcommon() throws InterruptedException
+	{
+		
+		driver.get("https://www.google.com/");
+		Thread.sleep(2000);
+		
+		WebElement Searchbox= driver.findElement(By.xpath("//textarea[@class=\"gLFyf\"]"));
+		Searchbox.sendKeys("cakes");
+		Searchbox.submit();
+		
+		List<WebElement> cakes=driver.findElements(By.xpath("//a[contains (.,\"cake\")]"));
+		
+		for (WebElement cake : cakes)
+		{
+			String names=cake.getText();
+			System.out.println(names);
+		}
+		
+		
+	}
 	
 	
 }
