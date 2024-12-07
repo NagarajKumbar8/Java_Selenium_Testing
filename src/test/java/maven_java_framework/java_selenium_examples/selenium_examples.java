@@ -144,7 +144,7 @@ public class selenium_examples extends common_base_code {
 
 	}
 
-	@Test
+	@Test (invocationCount = 7, threadPoolSize = 3)
 	public void dynamic_dropdown() throws InterruptedException {
 		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
 
@@ -630,15 +630,82 @@ public class selenium_examples extends common_base_code {
 		
 		List<WebElement> cakes=driver.findElements(By.xpath("//a[contains (.,\"cake\")]"));
 		
+		//For each loop Iterates loop for each webelement
 		for (WebElement cake : cakes)
 		{
 			String names=cake.getText();
 			System.out.println(names);
 		}
+		//or
 		
+//		for (int i=0; i<cakes.size(); i++)
+//		{
+//			WebElement cake= cakes.get(i);
+//			String name=cake.getText();
+//			
+//			System.out.println(name);
+//			
+//		}
 		
+	}	
+
+	@Test
+	public void prinrepatedchar() {
+
+		        String input = "my name is nagaraj";
+		        StringBuilder checked = new StringBuilder(); // To track processed characters
+
+		        // Outer loop to pick each character
+		        for (int i = 0; i < input.length(); i++) {
+		            char currentChar = input.charAt(i);
+
+		            // Skip already processed characters
+		            if (checked.toString().indexOf(currentChar) != -1) {
+		                continue;
+		            }
+
+		            // Inner loop to count occurrences of the current character
+		            int count = 0;
+		            for (int j = 0; j < input.length(); j++) {
+		                if (input.charAt(j) == currentChar) {
+		                    count++;
+		                }
+		            }
+
+		            // Mark the character as processed
+		            checked.append(currentChar);
+
+		            // Print the result
+		            System.out.println("Character '" + currentChar + "' repeated " + count + " times.");
+		        }
+		    }
+		
+	
+	@Test
+	public void reversestringsentance() {
+		
+	        String sentence = "Hello world this is Java";
+	        System.out.println("Original Sentence: " + sentence);
+
+	        // Split the sentence into words
+	        String[] words = sentence.split(" ");
+
+	        // Reverse the array of words
+	        StringBuilder reversedSentence = new StringBuilder();
+	        for (int i = words.length - 1; i >= 0; i--) {
+	            reversedSentence.append(words[i]).append(" ");
+	        }
+
+	        // Trim the extra space and print
+	        System.out.println("Reversed Sentence: " + reversedSentence.toString().trim());
+	    
 	}
-	
-	
 }
+
+
+
+
+
+
+
 	
