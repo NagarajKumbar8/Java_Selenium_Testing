@@ -56,7 +56,7 @@ public class selenium_examples extends common_base_code {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.get("https://rahulshettyacademy.com/locatorspractice/"); // open URL
 		// or
-		driver.navigate().to("https://rahulshettyacademy.com/locatorspractice/");
+		//driver.navigate().to("https://rahulshettyacademy.com/locatorspractice/");
 		driver.manage().window().maximize(); // full screen
 		driver.navigate().refresh();
 		driver.getCurrentUrl();
@@ -292,15 +292,13 @@ public class selenium_examples extends common_base_code {
 		addcartcode.Additemstocart();
 		//Implicit wait
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		//driver.manage().timeouts().implicitlyWait(Duration.ofMinutes(1));
 		
 		driver.findElement(By.xpath("//a[@class=\"cart-icon\"]")).click();
 		driver.findElement(By.xpath("//button[text()=\"PROCEED TO CHECKOUT\"]")).click();
 		driver .findElement(By.xpath("//input[@class=\"promoCode\"]")).sendKeys("rahulshettyacademy");
 		driver.findElement(By.xpath("//button[@class=\"promoBtn\"]")).click();
-		
-		
-		
-			
+				
 	}
 	
 	@Test
@@ -520,7 +518,7 @@ public class selenium_examples extends common_base_code {
 		//screenshot
 	
 		File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		FileUtils.copyFile(src, new File("C:\\\\Users\\\\nagar\\\\eclipse-workspace\\\\java_selenium_examples\\\\Screenshot\\Screenshot1.png"));
+		FileUtils.copyFile(src, new File("C:\\Users\\nagar\\eclipse-workspace\\java_selenium_examples\\Screenshot\\Screenshot1.png"));
 		driver.quit();
 	}
 	
@@ -680,26 +678,22 @@ public class selenium_examples extends common_base_code {
 		        }
 		    }
 		
-	
+
 	@Test
-	public void reversestringsentance() {
+	public void revwords()
+	{
+		String name="My name is nagaraj";
+		String[] split= name.split(" ");
+		String rev= " ";
 		
-	        String sentence = "Hello world this is Java";
-	        System.out.println("Original Sentence: " + sentence);
-
-	        // Split the sentence into words
-	        String[] words = sentence.split(" ");
-
-	        // Reverse the array of words
-	        StringBuilder reversedSentence = new StringBuilder();
-	        for (int i = words.length - 1; i >= 0; i--) {
-	            reversedSentence.append(words[i]).append(" ");
-	        }
-
-	        // Trim the extra space and print
-	        System.out.println("Reversed Sentence: " + reversedSentence.toString().trim());
-	    
+		for(int i=split.length-1; i>=0; i--)
+		{
+			rev= rev + split[i] + " " ;	
+		}
+		System.out.println(rev);
+	
 	}
+	
 }
 
 
