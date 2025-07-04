@@ -7,37 +7,37 @@
     <listener class-name="testng.Listeners"/>
   </listeners>
   
-  <test name="TEST-NG test case">  
-  <!-- <groups>
+  <!--<test name="TEST-NG test case">  
+   <groups>
    	<run>
    		<include name="smoke"></include>
    	</run>
    
-   </groups>-->
+   </groups>
     <classes>
     
       <class name="testng.testngexample"/>
       
     </classes>
     
-  </test> <!-- Test -->
+  </test>  Test -->
   
     <test name="seleniump-Examples"> 
    
     <classes>	
       <class name="maven_java_framework.java_selenium_examples.selenium_examples">
         
-        <methods>
+        <!--<methods>
           <exclude name="auto_sugestive_dropdown"/>
           <exclude name="actionsdemo"/>
-          <exclude name="frames.*"/> <!-- it will exclude test cases start with frames word-->
+          <exclude name="frames.*"/>  it will exclude test cases start with frames word
           <exclude name="findbrokenlink"/>
           
           
           <include name="selenium4feature"/>
 
           
-        </methods>
+        </methods>-->
         
       </class>
     </classes>

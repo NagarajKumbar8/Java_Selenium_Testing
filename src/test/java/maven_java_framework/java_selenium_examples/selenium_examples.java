@@ -171,7 +171,7 @@ public class selenium_examples extends common_base_code {
 		for (WebElement option : options) // auto sugestive dropdown
 		{
 			if (option.getText().equalsIgnoreCase("India"))
-				;
+				
 			{
 				option.click();
 				System.out.println(driver.findElement(By.id("autosuggest")).getText());
@@ -291,7 +291,7 @@ public class selenium_examples extends common_base_code {
 		selenium_examples addcartcode = new selenium_examples();
 		addcartcode.Additemstocart();
 		//Implicit wait
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		//driver.manage().timeouts().implicitlyWait(Duration.ofMinutes(1));
 		
 		driver.findElement(By.xpath("//a[@class=\"cart-icon\"]")).click();
@@ -309,7 +309,7 @@ public class selenium_examples extends common_base_code {
 		
 		WebDriverWait w = new WebDriverWait(driver,Duration.ofSeconds(10));   //(driver, 5);
 		w.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class=\"promoInfo\"]")));
-		//w.until(ExpectedConditions.
+		//w.until(ExpectedConditions.alertIsPresent());
 		//Syntax for waits
 		//w.until(ExpectedConditions
 		
@@ -328,10 +328,15 @@ public class selenium_examples extends common_base_code {
 		//js.executeScript("document.querySelector('.tableFixHead').scrollTop=500");
 		
 		WebElement move=driver.findElement(By.id("mousehover"));
+		
 		Actions a=new Actions(driver);
+		
 		a.moveToElement(driver.findElement(By.id("mousehover"))).perform();
+		
 		driver.findElement(By.xpath("//a[text()=\"Top\"]")).click();
+		
 		WebElement Home=driver.findElement(By.xpath("//button[text()=\"Home\"]"));
+		
 		a.moveToElement(Home).contextClick().build().perform(); //right click
 		Thread.sleep(5000);
 		
@@ -343,9 +348,11 @@ public class selenium_examples extends common_base_code {
 		driver.get("https://rahulshettyacademy.com/loginpagePractise/#");
 		
 		driver.findElement(By.xpath("//a[@class=\"blinkingText\"]")).click();
+		
 		//Window handle or new tabs
 	   Set<String> windows=driver.getWindowHandles(); //parent and child windows 
-	   Iterator<String> it= windows.iterator();
+	  
+	   Iterator<String> it= windows.iterator(); 
 	   String parantId = it.next();
 	   String childId = it.next();
 	   
@@ -379,8 +386,9 @@ public class selenium_examples extends common_base_code {
 		//driver.switchTo().frame(Webelement) Using Webelent
 		//driver.switchTo().frame(targatred locatore) locator
 		System.out.println(driver.findElements(By.tagName("iframe")).size());
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class=\"demo-frame\"]")));
 		
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class=\"demo-frame\"]")));
+		//Index, By Feamename and by Webelement
 		driver.findElement(By.id("draggable")).isDisplayed();
 		//drag and drop
 		
@@ -693,6 +701,22 @@ public class selenium_examples extends common_base_code {
 		System.out.println(rev);
 	
 	}
+	
+	@Test
+	public void RevStringbuilder()
+	{
+		 StringBuilder str = new StringBuilder("abcd abc");
+
+		    // Convert StringBuilder to String to use split()
+		    String[] split = str.toString().split(" ");
+
+		    // Print reversed string
+		    System.out.println(str.reverse());
+
+		}
+		
+		
+	
 	
 }
 
