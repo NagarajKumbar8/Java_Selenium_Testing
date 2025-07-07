@@ -1,6 +1,12 @@
 package maven_java_framework.java_selenium_examples;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -8,7 +14,7 @@ import org.testng.annotations.Test;
 
 import io.qameta.allure.Description;
 
-public class java_programs {
+public class java_programs<Interger> {
 
 	@Description(" Reverse string and check palindrome")
 	@Test
@@ -94,6 +100,124 @@ public class java_programs {
 		System.out.println(str.reverse());
 
 	}
+	
+	@Test
+	public void duplicates_in_array() {
+		
+		int a[] = {1,2,1,3,4,3,6};
+		
+		HashSet<Integer> set=new HashSet<Integer>(); 
+		HashSet<Integer> duplicates=new HashSet<Integer>();
+		
+		for (int num : a)
+		{
+			if ( !set.add(num)) {
+				
+				duplicates.add(num);
+			}
+			
+		}
+		
+		System.out.println(duplicates);
+	}
+	
+	
+	@Test
+	public void duplicates_str_array() {
+		
+		List<String> names= Arrays.asList("nagu","akash","nagu","akash","guru");
+		
+		Set<String> seen=new HashSet<String>(); 
+		Set<String> duplicates=new HashSet<String>();
+		
+		for (String  name : names)
+		{
+			if ( !seen.add(name)) {
+				
+				duplicates.add(name);
+			}
+			
+		}
+		
+		System.out.println(duplicates);
+	}
+	
+	
+	@Test //find unique numbers
+	public void remove_duplicates() {
+		
+		//int a[] = {1,2,1,3,4,3,6};
+		
+		List<Integer> arr=Arrays.asList(1,2,1,3,4,3,6);
+		
+		Set<Integer>  unique= new HashSet<Integer>(arr);
+		
+		System.out.println(unique);
+		
+		
+	}
+	
+	
+	
+	
+	
+	@Test
+	public void countfrequency_of_char() {
+		
+		Map<Character, Integer> count= new HashMap<>();
+		
+		String name= "nagaraj";
+		
+		for (char c : name.toCharArray() ) {
+			
+			count.put(c, count.getOrDefault(c, 0) + 1);
+		}
+		System.out.println(count);
+	}
+	
+	
+	@Test
+	public void replace_space_in_string(){
+		
+		String s="n a ga r a j";
+		
+		String output=s.replaceAll("\\s", "");
+		
+		System.out.println(output);
+		
+	}
+	
+	
+	@Test
+	public void str_split_iterat()
+	{
+		
+		String str="My name is nagaraj";
+		
+		String[] words=str.split(" ");
+		
+		for (String s : words)
+		{
+			System.out.println(s);
+		}
+		
+	}
+	
+	@Test
+	public void compare_two_str() {
+		
+		
+		String s1="abc";
+		String s2="abc";
+		
+		System.out.println(s1 == s2);
+		//False  - reference check
+		
+		System.out.println(s1.equals(s2));
+		//true - Value check
+	}
+	
+	
 	
 	
 	
