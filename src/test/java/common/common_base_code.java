@@ -40,7 +40,7 @@ public class common_base_code {
 		
 		TakesScreenshot ss= (TakesScreenshot)driver;
 		File source = ss.getScreenshotAs(OutputType.FILE);
-		File file= new File ("/java_selenium_examples/Screenshot//"+testcase_name+".png");
+		File file= new File ("/java_selenium_examples/Screenshot"+testcase_name+".png");
 		FileUtils.copyFile(source, file);
 		return "/java_selenium_examples/Screenshot//"+testcase_name+".png";
 				

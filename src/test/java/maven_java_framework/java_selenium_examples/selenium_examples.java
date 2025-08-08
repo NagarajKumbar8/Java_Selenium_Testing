@@ -42,6 +42,10 @@ import org.testng.asserts.SoftAssert;
 import common.common_base_code;
 import io.qameta.allure.Description;
 
+
+////tag[contains(@attribute, 'partial_value')]
+// //a [contains (text(), "Press Releases")]
+
 public class selenium_examples extends common_base_code {
 	private int i;
 	
@@ -205,7 +209,7 @@ public class selenium_examples extends common_base_code {
 	}
 	
 	@Description("Calender functionality test")
-	@Test
+	@Test(description="aa")
 	public void calenders() throws InterruptedException {
 		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
 
@@ -321,6 +325,7 @@ public class selenium_examples extends common_base_code {
 	{
 		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
 		Thread.sleep(3000);
+		
 		JavascriptExecutor js=(JavascriptExecutor)driver;
 		
 		js.executeScript("window.scrollBy(0,900)");

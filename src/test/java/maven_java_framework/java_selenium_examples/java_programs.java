@@ -80,7 +80,8 @@ public class java_programs<Interger> {
 		String[] split = name.split(" ");
 		String rev = " ";
 
-		for (int i = split.length - 1; i >= 0; i--) {
+		for (int i = split.length - 1; i >= 0; i--)
+		{
 			rev = rev + split[i] + " ";
 		}
 		System.out.println(rev);
@@ -104,14 +105,14 @@ public class java_programs<Interger> {
 	@Test
 	public void duplicates_in_array() {
 		
-		int a[] = {1,2,1,3,4,3,6};
+		int a[] = {1,2,1,3,4,3,6,4};
 		
-		HashSet<Integer> set=new HashSet<Integer>(); 
+		HashSet<Integer> seen=new HashSet<Integer>(); 
 		HashSet<Integer> duplicates=new HashSet<Integer>();
 		
 		for (int num : a)
 		{
-			if ( !set.add(num)) {
+			if ( !seen.add(num)) {
 				
 				duplicates.add(num);
 			}
@@ -158,19 +159,18 @@ public class java_programs<Interger> {
 	}
 	
 	
-	
-	
-	
 	@Test
 	public void countfrequency_of_char() {
 		
-		Map<Character, Integer> count= new HashMap<>();
 		
 		String name= "nagaraj";
 		
+		Map<Character, Integer> count= new HashMap<>();
+		
+		
 		for (char c : name.toCharArray() ) {
 			
-			count.put(c, count.getOrDefault(c, 0) + 1);
+			count.put(c, count.getOrDefault(c, 0) + 1);  //method used -  getOrDefault
 		}
 		System.out.println(count);
 	}
@@ -181,7 +181,7 @@ public class java_programs<Interger> {
 		
 		String s="n a ga r a j";
 		
-		String output=s.replaceAll("\\s", "");
+		String output=s.replaceAll("\\s", "");  //  \\s whitespace
 		
 		System.out.println(output);
 		
@@ -217,7 +217,15 @@ public class java_programs<Interger> {
 		//true - Value check
 	}
 	
-	
+	@Test
+	public void print_even_num() {
+		
+		List<Integer> list=Arrays.asList(1,2,4,5,2,7,8,9,12);
+		
+		list.stream().filter(e  -> e%2 ==0) .forEach(System.out::println);
+		
+		
+	}
 	
 	
 	
